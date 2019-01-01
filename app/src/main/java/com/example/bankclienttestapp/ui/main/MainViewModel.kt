@@ -40,7 +40,7 @@ class MainViewModel(
     private val application: Application,
     private val repository: UsersRepository,
     private val currencyRepository: CurrencyRepository
-) : ViewModel(), CardsFragment.SelectUserListener {
+) : ViewModel(), CardsFragment.SelectUserListener, CardsFragment.IsCardSelectedListener {
     val isLoading = MutableLiveData<Boolean>()
 
     val errorMessage = MutableLiveData<String?>()
@@ -61,7 +61,8 @@ class MainViewModel(
                 selectedCurrency.postValue(Currency.GBP)
 
                 val user = responseUser.users[0]
-                selectedProfile.postValue(createUserProfile(user, Currency.USD))
+                selectedProfile.postValue(createUserProfile(user, Currency.GBP))
+                isLoading.postValue(false)
             }, {
                 isLoading.postValue(false)
                 errorMessage.postValue(it)
@@ -167,5 +168,9 @@ class MainViewModel(
 
         val newProfile = createUserProfile(user, currency)
         selectedProfile.postValue(newProfile)
+    }
+
+    override fun isSelectedCard(user: User): Boolean {
+        return selectedProfile.value?.cardNumber == user.cardNumber
     }
 }

@@ -4,12 +4,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.bankclienttestapp.model.User
 
-class CardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class CardsViewHolder(itemView: View, private val isSelectedCard: (user: User) -> Boolean) : RecyclerView.ViewHolder(itemView) {
     private val cardType: ImageView = itemView.findViewById(R.id.card_item_type)
     private val cardNumber: TextView = itemView.findViewById(R.id.card_item_number)
+    private val selectedCardIcon: ImageView = itemView.findViewById(R.id.card_item_isActive)
 
     fun bind(item: User) {
         cardNumber.text = item.cardNumber
@@ -26,9 +26,10 @@ class CardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             }
         }
 
-//        Glide.with(cardType)
-//            .load(item.type)
-//            .centerCrop()
-//            .into(cardType)
+        if (isSelectedCard(item)) {
+            selectedCardIcon.visibility = View.VISIBLE
+        } else {
+            selectedCardIcon.visibility = View.GONE
+        }
     }
 }

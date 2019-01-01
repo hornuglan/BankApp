@@ -34,10 +34,19 @@ class MainFragment : Fragment() {
     private lateinit var cardExpirationDate: TextView
     private lateinit var cardBalanceCurrentCurrency: TextView
     private lateinit var cardBalanceDefaultCurrency: TextView
+    private lateinit var progressbar: ProgressBar
 
     private lateinit var currencyGbp: RelativeLayout
+    private lateinit var currencyGbpIcon: TextView
+    private lateinit var currencyGbpCode: TextView
+
     private lateinit var currencyEur: RelativeLayout
+    private lateinit var currencyEurIcon: TextView
+    private lateinit var currencyEurCode: TextView
+
     private lateinit var currencyRub: RelativeLayout
+    private lateinit var currencyRubIcon: TextView
+    private lateinit var currencyRubCode: TextView
 
     private lateinit var adapter: TransactionAdapter
 
@@ -57,10 +66,17 @@ class MainFragment : Fragment() {
             cardExpirationDate = findViewById(R.id.card_validation_date)
             cardBalanceCurrentCurrency = findViewById(R.id.card_current_currency)
             cardBalanceDefaultCurrency = findViewById(R.id.card_default_currency)
+            progressbar = findViewById(R.id.main_fragment_progressbar)
 
             currencyGbp = findViewById(R.id.currency_gbp)
+            currencyGbpIcon = findViewById(R.id.currency_symbol_gbp)
+            currencyGbpCode = findViewById(R.id.currency_name_gbp)
             currencyEur = findViewById(R.id.currency_eur)
+            currencyEurIcon = findViewById(R.id.currency_symbol_eur)
+            currencyEurCode = findViewById(R.id.currency_name_eur)
             currencyRub = findViewById(R.id.currency_rub)
+            currencyRubIcon = findViewById(R.id.currency_symbol_rub)
+            currencyRubCode = findViewById(R.id.currency_name_rub)
         }
 
         adapter = TransactionAdapter(LayoutInflater.from(activity), arrayListOf())
@@ -91,8 +107,6 @@ class MainFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initializeViewModel()
-
-//        viewModel.preloadData()
         initRecycler()
     }
 
@@ -123,12 +137,15 @@ class MainFragment : Fragment() {
             when (it.currency) {
                 Currency.GBP -> {
                     currencyGbp.background = resources.getDrawable(R.drawable.rounded_rectangle_blue)
+                    cardBalanceCurrentCurrency.text = "£ ${it.convertedBalance}"
                 }
                 Currency.EUR -> {
                     currencyEur.background = resources.getDrawable(R.drawable.rounded_rectangle_blue)
+                    cardBalanceCurrentCurrency.text = "€ ${it.convertedBalance}"
                 }
                 Currency.RUB -> {
                     currencyRub.background = resources.getDrawable(R.drawable.rounded_rectangle_blue)
+                    cardBalanceCurrentCurrency.text = "₽ ${it.convertedBalance}"
                 }
                 Currency.USD -> {
                     // ignore this case
@@ -139,12 +156,15 @@ class MainFragment : Fragment() {
             adapter.notifyDataSetChanged()
         })
 
-        viewModel.isLoading.observe(viewLifecycleOwner, Observer {loaded ->
-            if (loaded) {
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {isLoading ->
+            if (isLoading) {
                 // remove spinner
+                progressbar.visibility = View.VISIBLE
             } else {
                 if (viewModel.errorMessage.value != null) {
                     Toast.makeText(context, viewModel.errorMessage.value, Toast.LENGTH_SHORT).show()
+                } else {
+                    progressbar.visibility = View.GONE
                 }
             }
         })

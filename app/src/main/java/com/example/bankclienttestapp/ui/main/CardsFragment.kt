@@ -18,8 +18,6 @@ import com.example.bankclienttestapp.model.User
 class CardsFragment : Fragment() {
     private lateinit var adapter: CardsAdapter
 
-    private var listener: SelectUserListener? = null
-
     private lateinit var backButton: ImageView
 
     private val viewModel: MainViewModel by activityViewModels()
@@ -44,7 +42,7 @@ class CardsFragment : Fragment() {
             (activity as MainActivity).navController.navigate(R.id.action_cardsFragment_to_mainFragment)
         }
 
-        adapter = CardsAdapter(LayoutInflater.from(activity), arrayListOf(), callback)
+        adapter = CardsAdapter(LayoutInflater.from(activity), arrayListOf(), callback, viewModel::isSelectedCard)
 
         return root
     }
@@ -83,5 +81,9 @@ class CardsFragment : Fragment() {
 
     interface SelectUserListener {
         fun selectUser(user: User)
+    }
+
+    interface IsCardSelectedListener {
+        fun isSelectedCard(user: User) : Boolean
     }
 }

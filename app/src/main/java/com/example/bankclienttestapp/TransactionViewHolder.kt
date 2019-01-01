@@ -17,8 +17,21 @@ class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     fun bind(item: Transaction) {
         transactionTitle.text = item.title
         transactionDate.text = item.date
-        transactionCurrentSum.text = item.convertedAmount.toString()
-        transactionDefaultSum.text = item.amount
+        transactionCurrentSum.text = "£ ${item.convertedAmount.toString()}"
+        transactionDefaultSum.text = "$ ${item.amount}"
+
+        when(item.currency) {
+            Currency.GBP -> {
+                transactionCurrentSum.text = "£ ${item.convertedAmount.toString()}"
+            }
+            Currency.EUR -> {
+                transactionCurrentSum.text = "€ ${item.convertedAmount.toString()}"
+            }
+            Currency.RUB -> {
+                transactionCurrentSum.text = "₽ ${item.convertedAmount.toString()}"
+            }
+            else -> {}
+        }
 
         Glide.with(transactionIcon)
             .load(item.iconUrl)

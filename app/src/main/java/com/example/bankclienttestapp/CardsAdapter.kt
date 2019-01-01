@@ -9,7 +9,8 @@ import com.example.bankclienttestapp.model.User
 class CardsAdapter(
     private val inflater: LayoutInflater,
     var items: ArrayList<User>,
-    private val listener: (user: User) -> Unit
+    private val selectNewProfile: (user: User) -> Unit,
+    private val isSelectedCard: (user: User) -> Boolean
 ) : RecyclerView.Adapter<CardsViewHolder>() {
 
     override fun getItemCount(): Int = items.size
@@ -20,7 +21,7 @@ class CardsAdapter(
 
         val cardNumber = holder.itemView.findViewById<TextView>(R.id.card_item_number)
         cardNumber.setOnClickListener {
-            listener.invoke(items[position])
+            selectNewProfile.invoke(items[position])
         }
     }
 
@@ -30,7 +31,8 @@ class CardsAdapter(
                 R.layout.cards_fragment_list_item,
                 parent,
                 false
-            )
+            ),
+            isSelectedCard
         )
     }
 }
