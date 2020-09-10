@@ -9,11 +9,12 @@
     android:paddingStart="22dp"
     android:paddingEnd="22dp">
 
-    <ImageView
+    <TextView
         android:id="@+id/card_type_icon"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="#000"
+        tools:text="Visa"
+        android:textColor="#000"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -21,9 +22,10 @@
         android:id="@+id/card_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="4455 1223 3488 1000"
+        tools:text="4455 1223 3488 1000"
         android:textSize="22sp"
         android:paddingStart="18dp"
+        android:textColor="#000"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/card_type_icon"/>
     
@@ -40,10 +42,11 @@
         android:id="@+id/card_holder_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Anton Ivanov"
+        tools:text="Anton Ivanov"
         android:textSize="22sp"
         android:layout_marginTop="33dp"
         android:paddingStart="14dp"
+        android:textColor="#000"
         app:layout_constraintStart_toEndOf="@id/card_holder_icon"
         app:layout_constraintTop_toBottomOf="@id/card_type_icon"/>
 
@@ -53,6 +56,7 @@
         android:layout_height="wrap_content"
         android:text="VALID THRU"
         android:paddingTop="24dp"
+        android:textColor="#000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_number"/>
 
@@ -60,7 +64,8 @@
         android:id="@+id/card_validation_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="12/22"
+        tools:text="12/22"
+        android:textColor="#000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_validation_title"/>
 
@@ -68,8 +73,9 @@
         android:id="@+id/card_current_currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="£2 125,12"
+        tools:text="£2 125,12"
         android:paddingTop="37dp"
+        android:textColor="#000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card_holder_name"/>
 
@@ -79,6 +85,7 @@
         android:layout_height="wrap_content"
         android:text="Your balance"
         android:paddingTop="21dp"
+        android:textColor="#000"
         app:layout_constraintTop_toBottomOf="@id/card_validation_date"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -86,7 +93,8 @@
         android:id="@+id/card_default_currency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="$2 617.14"
+        tools:text="$2 617.14"
+        android:textColor="#000"
         app:layout_constraintTop_toBottomOf="@id/card_default_currency_title"
         app:layout_constraintEnd_toEndOf="parent"/>
 

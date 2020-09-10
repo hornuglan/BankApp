@@ -47,7 +47,7 @@
 
     <include
         android:id="@+id/history"
-        layout="@layout/layout_trainsactions_history_list"
+        layout="@layout/layout_transactions_history_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
