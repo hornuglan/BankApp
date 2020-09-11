@@ -77,11 +77,18 @@ class MainFragment : Fragment() {
                     is Result.Success -> {
                         val users = Gson().fromJson(result.get(), Response::class.java)
                         val user = users.users[0]
-                        cardTypeIcon.text = user.type
-                        cardNumber.text = user.card_number
-                        cardHolderName.text = user.cardholder_name
-                        cardExpirationDate.text = user.valid
-                        cardBalanceDefaultCurrency.text = user.balance.toString()
+
+                        activity?.runOnUiThread {
+                            cardTypeIcon.text = user.type
+                            cardNumber.text = user.card_number
+                            cardHolderName.text = user.cardholder_name
+                            cardExpirationDate.text = user.valid
+                            cardBalanceDefaultCurrency.text = user.balance.toString()
+                        }
+                        val transactions = users.users[0].transaction_history
+                        transactions.forEach {
+                            transactions.add(it)
+                        }
                     }
                 }
             }
@@ -93,7 +100,8 @@ class MainFragment : Fragment() {
         recyclerView?.layoutManager = layoutManager
         recyclerView?.adapter = TransactionAdapter(
             LayoutInflater.from(activity),
-            transactions)
+            transactions
+        )
     }
 
 }

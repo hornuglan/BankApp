@@ -20,8 +20,9 @@
 
     <TextView
         android:id="@+id/card_number"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
         tools:text="4455 1223 3488 1000"
         android:textSize="22sp"
         android:paddingStart="18dp"
@@ -40,8 +41,9 @@
     
     <TextView
         android:id="@+id/card_holder_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constrainedWidth="true"
         tools:text="Anton Ivanov"
         android:textSize="22sp"
         android:layout_marginTop="33dp"
