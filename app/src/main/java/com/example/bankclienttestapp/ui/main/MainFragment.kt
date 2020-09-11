@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,7 @@ import com.google.gson.Gson
 
 class MainFragment : Fragment() {
 
-    private lateinit var cardTypeIcon: TextView
+    private lateinit var cardTypeIcon: ImageView
     private lateinit var cardNumber: TextView
     private lateinit var cardHolderName: TextView
     private lateinit var cardExpirationDate: TextView
@@ -79,16 +80,21 @@ class MainFragment : Fragment() {
                         val user = users.users[0]
 
                         activity?.runOnUiThread {
-                            cardTypeIcon.text = user.type
+                            when(user.type) {
+                                "mastercard" -> { cardTypeIcon.setImageResource(R.drawable.mastercard) }
+                                "visa" -> { cardTypeIcon.setImageResource(R.drawable.visa) }
+                                "unionpay" -> { cardTypeIcon.setImageResource(R.drawable.unionpay) }
+                            }
                             cardNumber.text = user.card_number
                             cardHolderName.text = user.cardholder_name
                             cardExpirationDate.text = user.valid
-                            cardBalanceDefaultCurrency.text = user.balance.toString()
+                            cardBalanceCurrentCurrency.text = "£ ${user.balance}"
+                            cardBalanceDefaultCurrency.text = "$ ${user.balance}"
                         }
-                        val transactions = users.users[0].transaction_history
-                        transactions.forEach {
-                            transactions.add(it)
-                        }
+//                        val transactions = users.users[0].transaction_history
+//                        transactions.forEach {
+//                            transactions.add(it)
+//                        }
                     }
                 }
             }
