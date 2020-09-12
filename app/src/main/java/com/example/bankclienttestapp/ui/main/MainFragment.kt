@@ -9,18 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bankclienttestapp.R
-import com.example.bankclienttestapp.Response
-import com.example.bankclienttestapp.Transaction
-import com.example.bankclienttestapp.TransactionAdapter
+import com.example.bankclienttestapp.*
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import com.github.kittinunf.result.Result
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.gson.Gson
 
 class MainFragment : Fragment() {
+
+    private lateinit var cardDataLayout: ConstraintLayout
 
     private lateinit var cardTypeIcon: ImageView
     private lateinit var cardNumber: TextView
@@ -28,6 +29,8 @@ class MainFragment : Fragment() {
     private lateinit var cardExpirationDate: TextView
     private lateinit var cardBalanceCurrentCurrency: TextView
     private lateinit var cardBalanceDefaultCurrency: TextView
+
+    private lateinit var adapter: TransactionAdapter
 
     private var transactions = arrayListOf<Transaction>()
 
@@ -44,6 +47,7 @@ class MainFragment : Fragment() {
         val root = inflater.inflate(R.layout.main_fragment, container, false)
 
         with(root) {
+            cardDataLayout = findViewById(R.id.card_data)
             cardTypeIcon = findViewById(R.id.card_type_icon)
             cardNumber = findViewById(R.id.card_number)
             cardHolderName = findViewById(R.id.card_holder_name)
@@ -53,6 +57,13 @@ class MainFragment : Fragment() {
         }
 
         return root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        cardDataLayout.setOnClickListener {
+            (activity as MainActivity).navController.navigate(R.id.action_mainFragment_to_cardsFragment)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -91,10 +102,12 @@ class MainFragment : Fragment() {
                             cardBalanceCurrentCurrency.text = "£ ${user.balance}"
                             cardBalanceDefaultCurrency.text = "$ ${user.balance}"
                         }
-//                        val transactions = users.users[0].transaction_history
-//                        transactions.forEach {
-//                            transactions.add(it)
-//                        }
+
+                        val transactions = users.users[0].transaction_history
+                        transactions.forEach {
+                            transactions.add(it)
+                            adapter.notifyDataSetChanged()
+                        }
                     }
                 }
             }
