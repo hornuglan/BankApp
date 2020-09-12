@@ -13,7 +13,7 @@ class MainViewModel(private val application: Application, private val repository
 
     private val errorMessage = MutableLiveData<String?>()
 
-    private val userProfiles = MutableLiveData<ArrayList<User>>()
+    val userProfiles = MutableLiveData<ArrayList<User>>()
     val selectedProfile = MutableLiveData<User>()
     private val currency = MutableLiveData<Currency>()
     private val currencyRates = MutableLiveData<ArrayList<Valute>>()
