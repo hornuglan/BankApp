@@ -1,5 +1,6 @@
 package com.example.bankclienttestapp.ui.main
 
+import android.app.Application
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -10,13 +11,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankclienttestapp.*
+import com.example.bankclienttestapp.model.Transaction
+import com.example.bankclienttestapp.model.UsersRepository
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import com.github.kittinunf.result.Result
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.gson.Gson
 
 class MainFragment : Fragment() {
@@ -31,12 +35,6 @@ class MainFragment : Fragment() {
     private lateinit var cardBalanceDefaultCurrency: TextView
 
     private lateinit var adapter: TransactionAdapter
-
-    private var transactions = arrayListOf<Transaction>()
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     private lateinit var viewModel: MainViewModel
 
@@ -56,6 +54,8 @@ class MainFragment : Fragment() {
             cardBalanceDefaultCurrency = findViewById(R.id.card_default_currency)
         }
 
+        adapter = TransactionAdapter(LayoutInflater.from(activity), arrayListOf())
+
         return root
     }
 
@@ -68,59 +68,38 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+        initializeViewModel()
 
-        getCardData()
+        viewModel.preloadData()
         initRecycler()
-    }
-
-    private fun getCardData() {
-        val url = "https://hr.peterpartner.net/test/android/v1/users.json"
-
-        Fuel.get(url)
-            .header(Headers.CONTENT_TYPE, "application/json")
-            .responseString { _, _, result ->
-                when (result) {
-                    is Result.Failure -> {
-                        val e = result.getException()
-                        Log.d("Request Error", "${e.message}")
-                    }
-                    is Result.Success -> {
-                        val users = Gson().fromJson(result.get(), Response::class.java)
-                        val user = users.users[0]
-
-                        activity?.runOnUiThread {
-                            when(user.type) {
-                                "mastercard" -> { cardTypeIcon.setImageResource(R.drawable.mastercard) }
-                                "visa" -> { cardTypeIcon.setImageResource(R.drawable.visa) }
-                                "unionpay" -> { cardTypeIcon.setImageResource(R.drawable.unionpay) }
-                            }
-                            cardNumber.text = user.cardNumber
-                            cardHolderName.text = user.cardholderName
-                            cardExpirationDate.text = user.valid
-                            cardBalanceCurrentCurrency.text = "£ ${user.balance}"
-                            cardBalanceDefaultCurrency.text = "$ ${user.balance}"
-                        }
-
-                        val transactions = users.users[0].transactionHistory
-                        transactions.forEach {
-                            transactions.add(it)
-                            adapter.notifyDataSetChanged()
-                        }
-                    }
-                }
-            }
     }
 
     private fun initRecycler() {
         val recyclerView = view?.findViewById<RecyclerView>(R.id.transactions_history_list)
         val layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recyclerView?.layoutManager = layoutManager
-        recyclerView?.adapter = TransactionAdapter(
-            LayoutInflater.from(activity),
-            transactions
-        )
+        recyclerView?.adapter = adapter
     }
 
+    private fun initializeViewModel() {
+        viewModel = activity.let {
+            ViewModelProvider(this, MainViewModelFactory(Application(),  UsersRepository())).get(MainViewModel::class.java)
+        }
+
+        viewModel.selectedProfile.observe(viewLifecycleOwner, Observer { it ->
+            when(it.type) {
+                "mastercard" -> { cardTypeIcon.setImageResource(R.drawable.mastercard) }
+                "visa" -> { cardTypeIcon.setImageResource(R.drawable.visa) }
+                "unionpay" -> { cardTypeIcon.setImageResource(R.drawable.unionpay) }
+            }
+            cardNumber.text = it.cardNumber
+            cardHolderName.text = it.cardholderName
+            cardExpirationDate.text = it.valid
+            cardBalanceCurrentCurrency.text = "£ ${it.balance}"
+            cardBalanceDefaultCurrency.text = "$ ${it.balance}"
+
+            adapter.items = it.transactionHistory
+            adapter.notifyDataSetChanged()
+        })
+    }
 }

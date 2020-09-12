@@ -6,6 +6,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.bankclienttestapp.model.Transaction
 
 class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val transactionIcon:ImageView = itemView.findViewById(R.id.transaction_item_icon)

@@ -3,10 +3,11 @@ package com.example.bankclienttestapp
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bankclienttestapp.model.Transaction
 
 class TransactionAdapter(
     private val inflater: LayoutInflater,
-    private var items: ArrayList<Transaction>
+    var items: ArrayList<Transaction>
 ) : RecyclerView.Adapter<TransactionViewHolder>() {
 
     override fun getItemCount(): Int = items.size
