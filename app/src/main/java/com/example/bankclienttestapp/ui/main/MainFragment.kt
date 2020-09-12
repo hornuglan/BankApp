@@ -96,14 +96,14 @@ class MainFragment : Fragment() {
                                 "visa" -> { cardTypeIcon.setImageResource(R.drawable.visa) }
                                 "unionpay" -> { cardTypeIcon.setImageResource(R.drawable.unionpay) }
                             }
-                            cardNumber.text = user.card_number
-                            cardHolderName.text = user.cardholder_name
+                            cardNumber.text = user.cardNumber
+                            cardHolderName.text = user.cardholderName
                             cardExpirationDate.text = user.valid
                             cardBalanceCurrentCurrency.text = "£ ${user.balance}"
                             cardBalanceDefaultCurrency.text = "$ ${user.balance}"
                         }
 
-                        val transactions = users.users[0].transaction_history
+                        val transactions = users.users[0].transactionHistory
                         transactions.forEach {
                             transactions.add(it)
                             adapter.notifyDataSetChanged()

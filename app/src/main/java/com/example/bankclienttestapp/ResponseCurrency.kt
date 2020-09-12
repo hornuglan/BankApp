@@ -1,21 +1,37 @@
 package com.example.bankclienttestapp
 
-import com.fasterxml.jackson.annotation.JsonCreator
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class ResponseCurrency(
-    val Date: String,
-    val PreviousDate: String,
-    val PreviousURL: String,
-    val Timestamp: String,
-    val Valute: ArrayList<Valute>
-)
+    @SerializedName("Date")
+    val date: String,
+    @SerializedName("PreviousDate")
+    val previousDate: String,
+    @SerializedName("PreviousURL")
+    val previousUrl: String,
+    @SerializedName("Timestamp")
+    val timestamp: String,
+    @SerializedName("Valute")
+    val valute: ArrayList<Valute>
+): Parcelable
 
+@Parcelize
 data class Valute(
-    val ID: String,
-    val NumCode: String,
-    val CharCode: String,
-    val Nominal: Int,
-    val Name: String,
-    val Value: Double,
-    val Previous: Double
-)
+    @SerializedName("ID")
+    val id: String,
+    @SerializedName("NumCode")
+    val numCode: String,
+    @SerializedName("CharCode")
+    val charCode: String,
+    @SerializedName("Nominal")
+    val nominal: Int,
+    @SerializedName("Name")
+    val name: String,
+    @SerializedName("Value")
+    val value: Double,
+    @SerializedName("Previous")
+    val previous: Double
+): Parcelable

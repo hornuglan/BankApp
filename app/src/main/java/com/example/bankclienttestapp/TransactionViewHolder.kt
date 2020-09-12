@@ -21,7 +21,7 @@ class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
         transactionDefaultSum.text = item.amount
 
         Glide.with(transactionIcon)
-            .load(item.icon_url)
+            .load(item.iconUrl)
             .centerCrop()
             .into(transactionIcon)
     }
