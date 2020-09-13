@@ -39,6 +39,8 @@ class CurrencyRepository {
 
                     }
                     is Result.Success -> {
+                        val a = 10
+                        // Мы никак не обрабатываем здесь ошибку
                         val currencies = Gson().fromJson(result.get(), CurrencyResponse::class.java)
                         onSuccess(currencies)
                     }

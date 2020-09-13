@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -23,9 +24,9 @@ import com.google.android.material.appbar.MaterialToolbar
 class CardsFragment : Fragment() {
     private lateinit var toolbar: Toolbar
 
-    private lateinit var viewModel: MainViewModel
-
     private lateinit var adapter: CardsAdapter
+
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +48,6 @@ class CardsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         initializeViewModel()
 
-        viewModel.preloadData()
         initRecycler()
     }
 
@@ -59,10 +59,6 @@ class CardsFragment : Fragment() {
     }
 
     private fun initializeViewModel() {
-        viewModel = activity.let {
-            ViewModelProvider(this, MainViewModelFactory(Application(),  UsersRepository(), CurrencyRepository())).get(MainViewModel::class.java)
-        }
-
         viewModel.userProfiles.observe(viewLifecycleOwner, Observer { it ->
             adapter.items = it
             adapter.notifyDataSetChanged()

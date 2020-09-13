@@ -37,9 +37,9 @@ class MainViewModel(
     private val repository: UsersRepository,
     private val currencyRepository: CurrencyRepository
 ) : ViewModel() {
-    private val isLoading = MutableLiveData<Boolean>()
+    val isLoading = MutableLiveData<Boolean>()
 
-    private val errorMessage = MutableLiveData<String?>()
+    val errorMessage = MutableLiveData<String?>()
 
     val userProfiles = MutableLiveData<ArrayList<User>>()
     val selectedProfile = MutableLiveData<UserProfile>()
@@ -55,26 +55,19 @@ class MainViewModel(
         // failure -> errorMessage.postValue = "", isLoading = false
         // failure -> errorMessage.postValue = "", isLoading = false
 
-//        currencyRepository.loadCurrencies({
-//            repository.loadUserProfiles({responseUser ->
-//                currencyRates.postValue(it.valute)
-//                userProfiles.postValue(responseUser.users)
-//
-//                val user = responseUser.users[0]
-//                selectedProfile.postValue(createUserProfile(user))
-//            }, {
-//                errorMessage.postValue(it)
-//            })
-//        }, {
-//            errorMessage.postValue(it)
-//        })
+        currencyRepository.loadCurrencies({
+            repository.loadUserProfiles({responseUser ->
+                currencyRates.postValue(it.valute)
+                userProfiles.postValue(responseUser.users)
 
-        repository.loadUserProfiles({responseUser ->
-            userProfiles.postValue(responseUser.users)
-
-            val user = responseUser.users[2]
-            selectedProfile.postValue(createUserProfile(user))
+                val user = responseUser.users[0]
+                selectedProfile.postValue(createUserProfile(user))
+            }, {
+                isLoading.postValue(false)
+                errorMessage.postValue(it)
+            })
         }, {
+            isLoading.postValue(false)
             errorMessage.postValue(it)
         })
     }

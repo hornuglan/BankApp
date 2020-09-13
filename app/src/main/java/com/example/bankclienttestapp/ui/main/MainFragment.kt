@@ -10,8 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,7 +40,7 @@ class MainFragment : Fragment() {
 
     private lateinit var adapter: TransactionAdapter
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,10 +86,6 @@ class MainFragment : Fragment() {
     }
 
     private fun initializeViewModel() {
-        viewModel = activity.let {
-            ViewModelProvider(this, MainViewModelFactory(Application(),  UsersRepository(), CurrencyRepository())).get(MainViewModel::class.java)
-        }
-
         viewModel.selectedProfile.observe(viewLifecycleOwner, Observer { it ->
             when(it.type) {
                 "mastercard" -> { cardTypeIcon.setImageResource(R.drawable.mastercard) }
@@ -102,6 +100,16 @@ class MainFragment : Fragment() {
 
             adapter.items = it.transactionHistory
             adapter.notifyDataSetChanged()
+        })
+
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {loaded ->
+            if (loaded) {
+                // remove spinner
+            } else {
+                if (viewModel.errorMessage.value != null) {
+                    Toast.makeText(context, viewModel.errorMessage.value, Toast.LENGTH_SHORT).show()
+                }
+            }
         })
     }
 }
