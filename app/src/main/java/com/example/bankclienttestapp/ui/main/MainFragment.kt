@@ -29,7 +29,6 @@ import com.google.gson.Gson
 class MainFragment : Fragment() {
 
     private lateinit var cardDataLayout: ConstraintLayout
-    private lateinit var toolbar: Toolbar
 
     private lateinit var cardTypeIcon: ImageView
     private lateinit var cardNumber: TextView

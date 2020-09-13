@@ -17,14 +17,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankclienttestapp.CardsAdapter
 import com.example.bankclienttestapp.CurrencyRepository
+import com.example.bankclienttestapp.MainActivity
 import com.example.bankclienttestapp.R
 import com.example.bankclienttestapp.model.UsersRepository
 import com.google.android.material.appbar.MaterialToolbar
 
 class CardsFragment : Fragment() {
-    private lateinit var toolbar: Toolbar
-
     private lateinit var adapter: CardsAdapter
+
+    private lateinit var backButton: ImageView
 
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -39,9 +40,20 @@ class CardsFragment : Fragment() {
             false
         )
 
+        with(root) {
+            backButton = findViewById(R.id.back_button_cards_fragment)
+        }
+
         adapter = CardsAdapter(LayoutInflater.from(activity), arrayListOf())
 
         return root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        backButton.setOnClickListener {
+            (activity as MainActivity).navController.navigate(R.id.action_cardsFragment_to_mainFragment)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

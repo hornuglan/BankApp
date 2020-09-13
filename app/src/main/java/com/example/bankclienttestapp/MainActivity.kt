@@ -20,14 +20,11 @@ import kotlin.collections.ArrayList
 class MainActivity : AppCompatActivity() {
 
     lateinit var navController: NavController
-    private lateinit var toolbar: Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        toolbar = findViewById(R.id.toolbar_main_fragment)
-        setActionBar(toolbar)
         navController = Navigation.findNavController(this, R.id.nav_host)
 
 
