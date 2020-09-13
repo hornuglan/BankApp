@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_big">22sp</dimen>
+    <dimen name="text_size_normal_primary">17sp</dimen>
+    <dimen name="text_size_normal_secondary">16sp</dimen>
+
+    <dimen name="padding_toolbar">17dp</dimen>
+
+    <dimen name="margin_start_main_activity">16dp</dimen>
+    <dimen name="margin_end_main_activity">16dp</dimen>
+    <dimen name="margin_top_main_activity">24dp</dimen>
+    <dimen name="margin_bottom_main_activity">24dp</dimen>
+
+    <dimen name="padding_top_card_data_layout">28dp</dimen>
+    <dimen name="padding_bottom_card_data_layout">28dp</dimen>
+    <dimen name="padding_start_card_data_layout">22dp</dimen>
+    <dimen name="padding_end_card_data_layout">22dp</dimen>
+
+    <dimen name="height_transactions_list">176dp</dimen>
+    <dimen name="padding_text_transaction_item">17dp</dimen>
+
+    <dimen name="padding_currency_layout">17dp</dimen>
+    <dimen name="margin_currency_layout">14dp</dimen>
+    <dimen name="padding_currency_icon">41dp</dimen>
+    <dimen name="padding_currency_code">34dp</dimen>
+</resources>

@@ -8,21 +8,19 @@
 
     <TextView
         android:id="@+id/transactions_history_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="History"
+        style="@style/TextPrimary"
+        android:text="@string/transactions_history_title"
         android:paddingStart="22dp"
         android:paddingTop="20dp"
         android:paddingBottom="22dp"
-        android:textSize="17sp"
-        android:textColor="#141414"
+        android:textSize="@dimen/text_size_normal_primary"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/transactions_history_list"
         android:layout_width="match_parent"
-        android:layout_height="176dp"
+        android:layout_height="@dimen/height_transactions_list"
         android:layout_below="@id/transactions_history_title"
         tools:itemCount="3"
         android:scrollbarSize="4dp"

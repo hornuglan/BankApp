@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Bank Client Test App</string>
+
+    <string name="title_main_fragment">Главная</string>
+    <string name="title_cards_fragment">Мои карты</string>
+
+    <string name="main_fragment_change_currency_title">Change currency</string>
+
+    <string name="card_data_valid_thru_title">VALID THRU</string>
+    <string name="card_data_balance_title">Your balance</string>
+
+    <string name="transactions_history_title">History</string>
+    
+    <string name="currency_icon_usd">$</string>
+    <string name="currency_icon_eur">€</string>
+    <string name="currency_icon_gbp">\u00A3</string>
+    <string name="currency_icon_rub">₽</string>
+
+    <string name="currency_code_usd">USD</string>
+    <string name="currency_code_eur">EUR</string>
+    <string name="currency_code_gbp">GBP</string>
+    <string name="currency_code_rub">RUB</string>
 </resources>
