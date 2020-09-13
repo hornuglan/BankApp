@@ -12,11 +12,23 @@ class CardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val cardNumber: TextView = itemView.findViewById(R.id.card_item_number)
 
     fun bind(item: User) {
-       cardNumber.text = item.cardNumber
+        cardNumber.text = item.cardNumber
 
-        Glide.with(cardType)
-            .load(item.type)
-            .centerCrop()
-            .into(cardType)
+        when (item.type) {
+            "mastercard" -> {
+                cardType.setImageResource(R.drawable.mastercard)
+            }
+            "visa" -> {
+                cardType.setImageResource(R.drawable.visa)
+            }
+            "unionpay" -> {
+                cardType.setImageResource(R.drawable.unionpay)
+            }
+        }
+
+//        Glide.with(cardType)
+//            .load(item.type)
+//            .centerCrop()
+//            .into(cardType)
     }
 }

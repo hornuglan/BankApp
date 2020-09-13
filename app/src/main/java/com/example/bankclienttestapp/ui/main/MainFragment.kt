@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +27,7 @@ import com.google.gson.Gson
 class MainFragment : Fragment() {
 
     private lateinit var cardDataLayout: ConstraintLayout
+    private lateinit var toolbar: Toolbar
 
     private lateinit var cardTypeIcon: ImageView
     private lateinit var cardNumber: TextView

@@ -12,8 +12,7 @@
         tools:layout="@layout/main_fragment" >
         <action
             android:id="@+id/action_mainFragment_to_cardsFragment"
-            app:destination="@id/cardsFragment"
-            app:enterAnim="@android:anim/slide_out_right" />
+            app:destination="@id/cardsFragment" />
     </fragment>
     <fragment
         android:id="@+id/cardsFragment"
@@ -22,7 +21,7 @@
         <action
             android:id="@+id/action_cardsFragment_to_mainFragment"
             app:destination="@id/mainFragment"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
     <action
         android:id="@+id/action_nav_graph_self"

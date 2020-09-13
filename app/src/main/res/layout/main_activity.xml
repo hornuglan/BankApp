@@ -21,8 +21,7 @@
             android:id="@+id/toolbar_main_fragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/padding_toolbar"
-            android:paddingBottom="@dimen/padding_toolbar"
+            android:navigationIcon="@drawable/arrow_back"
             android:background="@color/colorPrimary"/>
 
     </com.google.android.material.appbar.AppBarLayout>
