@@ -7,9 +7,10 @@
 
     <ImageView
         android:id="@+id/transaction_item_icon"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:background="@color/colorPrimary"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:padding="10dp"
+        android:background="@drawable/rounded_stroke"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -17,7 +18,10 @@
         android:id="@+id/transaction_item_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="17dp"
         android:text="Netflix"
+        android:textSize="16sp"
+        android:textColor="#141414"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/transaction_item_icon"/>
 
@@ -25,7 +29,10 @@
         android:id="@+id/transaction_item_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="17dp"
         android:text="15/12/2019"
+        android:textSize="11sp"
+        android:textColor="#8C9AAE"
         app:layout_constraintTop_toBottomOf="@id/transaction_item_title"
         app:layout_constraintStart_toEndOf="@id/transaction_item_icon"/>
 
@@ -34,6 +41,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="- £ 7.99"
+        android:textSize="22sp"
+        android:textColor="#030710"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -42,6 +51,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="$ 9.85"
+        android:textSize="14sp"
+        android:textColor="#8C9AAE"
         app:layout_constraintTop_toBottomOf="@id/transaction_item_current_sum"
         app:layout_constraintEnd_toEndOf="parent"/>
 

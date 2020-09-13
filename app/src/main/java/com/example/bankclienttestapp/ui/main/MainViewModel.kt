@@ -72,7 +72,7 @@ class MainViewModel(
         repository.loadUserProfiles({responseUser ->
             userProfiles.postValue(responseUser.users)
 
-            val user = responseUser.users[0]
+            val user = responseUser.users[2]
             selectedProfile.postValue(createUserProfile(user))
         }, {
             errorMessage.postValue(it)
