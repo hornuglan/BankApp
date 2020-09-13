@@ -1,12 +1,11 @@
 package com.example.bankclienttestapp
 
-import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.bankclienttestapp.model.Transaction
+import com.example.bankclienttestapp.ui.main.Transaction
 
 class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val transactionIcon:ImageView = itemView.findViewById(R.id.transaction_item_icon)
@@ -18,7 +17,7 @@ class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     fun bind(item: Transaction) {
         transactionTitle.text = item.title
         transactionDate.text = item.date
-        transactionCurrentSum.text = item.amount
+        transactionCurrentSum.text = item.convertedAmount.toString()
         transactionDefaultSum.text = item.amount
 
         Glide.with(transactionIcon)

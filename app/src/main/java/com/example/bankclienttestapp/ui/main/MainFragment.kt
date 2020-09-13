@@ -83,7 +83,7 @@ class MainFragment : Fragment() {
 
     private fun initializeViewModel() {
         viewModel = activity.let {
-            ViewModelProvider(this, MainViewModelFactory(Application(),  UsersRepository())).get(MainViewModel::class.java)
+            ViewModelProvider(this, MainViewModelFactory(Application(),  UsersRepository(), CurrencyRepository())).get(MainViewModel::class.java)
         }
 
         viewModel.selectedProfile.observe(viewLifecycleOwner, Observer { it ->
@@ -95,7 +95,7 @@ class MainFragment : Fragment() {
             cardNumber.text = it.cardNumber
             cardHolderName.text = it.cardholderName
             cardExpirationDate.text = it.valid
-            cardBalanceCurrentCurrency.text = "£ ${it.balance}"
+            cardBalanceCurrentCurrency.text = "£ ${it.convertedBalance}"
             cardBalanceDefaultCurrency.text = "$ ${it.balance}"
 
             adapter.items = it.transactionHistory

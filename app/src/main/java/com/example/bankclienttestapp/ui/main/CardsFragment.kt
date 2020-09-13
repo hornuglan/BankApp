@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankclienttestapp.CardsAdapter
+import com.example.bankclienttestapp.CurrencyRepository
 import com.example.bankclienttestapp.R
 import com.example.bankclienttestapp.model.UsersRepository
 import com.google.android.material.appbar.MaterialToolbar
@@ -60,7 +61,7 @@ class CardsFragment : Fragment() {
 
     private fun initializeViewModel() {
         viewModel = activity.let {
-            ViewModelProvider(this, MainViewModelFactory(Application(),  UsersRepository())).get(MainViewModel::class.java)
+            ViewModelProvider(this, MainViewModelFactory(Application(),  UsersRepository(), CurrencyRepository())).get(MainViewModel::class.java)
         }
 
         viewModel.userProfiles.observe(viewLifecycleOwner, Observer { it ->

@@ -3,7 +3,7 @@ package com.example.bankclienttestapp
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bankclienttestapp.model.Transaction
+import com.example.bankclienttestapp.ui.main.Transaction
 
 class TransactionAdapter(
     private val inflater: LayoutInflater,
