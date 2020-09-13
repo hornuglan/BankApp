@@ -31,6 +31,6 @@ class MainActivity : AppCompatActivity() {
         ViewModelProvider(
             this,
             MainViewModelFactory(Application(), UsersRepository(), CurrencyRepository())
-        ).get(MainViewModel::class.java)
+        ).get(MainViewModel::class.java).preloadData()
     }
 }

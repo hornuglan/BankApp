@@ -1,6 +1,7 @@
 package com.example.bankclienttestapp.ui.main
 
 import android.app.Application
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -8,10 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
-import android.widget.Toolbar
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -37,6 +35,10 @@ class MainFragment : Fragment() {
     private lateinit var cardBalanceCurrentCurrency: TextView
     private lateinit var cardBalanceDefaultCurrency: TextView
 
+    private lateinit var currencyGbp: RelativeLayout
+    private lateinit var currencyEur: RelativeLayout
+    private lateinit var currencyRub: RelativeLayout
+
     private lateinit var adapter: TransactionAdapter
 
     private val viewModel: MainViewModel by activityViewModels()
@@ -55,6 +57,10 @@ class MainFragment : Fragment() {
             cardExpirationDate = findViewById(R.id.card_validation_date)
             cardBalanceCurrentCurrency = findViewById(R.id.card_current_currency)
             cardBalanceDefaultCurrency = findViewById(R.id.card_default_currency)
+
+            currencyGbp = findViewById(R.id.currency_gbp)
+            currencyEur = findViewById(R.id.currency_eur)
+            currencyRub = findViewById(R.id.currency_rub)
         }
 
         adapter = TransactionAdapter(LayoutInflater.from(activity), arrayListOf())
@@ -64,8 +70,21 @@ class MainFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         cardDataLayout.setOnClickListener {
             (activity as MainActivity).navController.navigate(R.id.action_mainFragment_to_cardsFragment)
+        }
+
+        currencyGbp.setOnClickListener {
+            viewModel.changeCurrency(Currency.GBP)
+        }
+
+        currencyEur.setOnClickListener {
+            viewModel.changeCurrency(Currency.EUR)
+        }
+
+        currencyRub.setOnClickListener {
+            viewModel.changeCurrency(Currency.RUB)
         }
     }
 
@@ -73,7 +92,7 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         initializeViewModel()
 
-        viewModel.preloadData()
+//        viewModel.preloadData()
         initRecycler()
     }
 
@@ -96,6 +115,25 @@ class MainFragment : Fragment() {
             cardExpirationDate.text = it.valid
             cardBalanceCurrentCurrency.text = "£ ${it.convertedBalance}"
             cardBalanceDefaultCurrency.text = "$ ${it.balance}"
+
+            currencyGbp.background = resources.getDrawable(R.drawable.rounded_rectangle)
+            currencyEur.background = resources.getDrawable(R.drawable.rounded_rectangle)
+            currencyRub.background = resources.getDrawable(R.drawable.rounded_rectangle)
+
+            when (it.currency) {
+                Currency.GBP -> {
+                    currencyGbp.background = resources.getDrawable(R.drawable.rounded_rectangle_blue)
+                }
+                Currency.EUR -> {
+                    currencyEur.background = resources.getDrawable(R.drawable.rounded_rectangle_blue)
+                }
+                Currency.RUB -> {
+                    currencyRub.background = resources.getDrawable(R.drawable.rounded_rectangle_blue)
+                }
+                Currency.USD -> {
+                    // ignore this case
+                }
+            }
 
             adapter.items = it.transactionHistory
             adapter.notifyDataSetChanged()

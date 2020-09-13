@@ -21,7 +21,7 @@ data class CurrencyResponse(
     @SerializedName("Timestamp")
     val timestamp: String,
     @SerializedName("Valute")
-    val valute: ArrayList<Valute>
+    val valute: HashMap<String, Valute>
 ): Parcelable
 
 class CurrencyRepository {
@@ -39,8 +39,6 @@ class CurrencyRepository {
 
                     }
                     is Result.Success -> {
-                        val a = 10
-                        // Мы никак не обрабатываем здесь ошибку
                         val currencies = Gson().fromJson(result.get(), CurrencyResponse::class.java)
                         onSuccess(currencies)
                     }
