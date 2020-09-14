@@ -1,28 +1,21 @@
-package com.example.bankclienttestapp.ui.main
+package com.example.bankclienttestapp.ui.main.fragments
 
-import android.app.Application
-import android.graphics.Color
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bankclienttestapp.*
-import com.example.bankclienttestapp.model.Transaction
-import com.example.bankclienttestapp.model.UsersRepository
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.Headers
-import com.github.kittinunf.result.Result
-import com.google.gson.Gson
+import com.example.bankclienttestapp.model.Currency
+import com.example.bankclienttestapp.ui.main.adapters.TransactionAdapter
+import com.example.bankclienttestapp.ui.main.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {
 
@@ -79,7 +72,11 @@ class MainFragment : Fragment() {
             currencyRubCode = findViewById(R.id.currency_name_rub)
         }
 
-        adapter = TransactionAdapter(LayoutInflater.from(activity), arrayListOf())
+        adapter =
+            TransactionAdapter(
+                LayoutInflater.from(activity),
+                arrayListOf()
+            )
 
         return root
     }
@@ -136,15 +133,21 @@ class MainFragment : Fragment() {
 
             when (it.currency) {
                 Currency.GBP -> {
-                    currencyGbp.background = resources.getDrawable(R.drawable.rounded_rectangle_blue)
+                    setActiveCurrencyStyles(currencyGbp, currencyGbpIcon, currencyGbpCode)
+                    setInactiveCurrencyStyles(currencyEur, currencyEurIcon, currencyEurCode)
+                    setInactiveCurrencyStyles(currencyRub, currencyRubIcon, currencyRubCode)
                     cardBalanceCurrentCurrency.text = "£ ${it.convertedBalance}"
                 }
                 Currency.EUR -> {
-                    currencyEur.background = resources.getDrawable(R.drawable.rounded_rectangle_blue)
+                    setActiveCurrencyStyles(currencyEur, currencyEurIcon, currencyEurCode)
+                    setInactiveCurrencyStyles(currencyGbp, currencyGbpIcon, currencyGbpCode)
+                    setInactiveCurrencyStyles(currencyRub, currencyRubIcon, currencyRubCode)
                     cardBalanceCurrentCurrency.text = "€ ${it.convertedBalance}"
                 }
                 Currency.RUB -> {
-                    currencyRub.background = resources.getDrawable(R.drawable.rounded_rectangle_blue)
+                    setActiveCurrencyStyles(currencyRub, currencyRubIcon, currencyRubCode)
+                    setInactiveCurrencyStyles(currencyGbp, currencyGbpIcon, currencyGbpCode)
+                    setInactiveCurrencyStyles(currencyEur, currencyEurIcon, currencyEurCode)
                     cardBalanceCurrentCurrency.text = "₽ ${it.convertedBalance}"
                 }
                 Currency.USD -> {
@@ -158,7 +161,6 @@ class MainFragment : Fragment() {
 
         viewModel.isLoading.observe(viewLifecycleOwner, Observer {isLoading ->
             if (isLoading) {
-                // remove spinner
                 progressbar.visibility = View.VISIBLE
             } else {
                 if (viewModel.errorMessage.value != null) {
@@ -168,5 +170,17 @@ class MainFragment : Fragment() {
                 }
             }
         })
+    }
+
+    private fun setActiveCurrencyStyles(layout: RelativeLayout, title: TextView, subtitle: TextView) {
+        layout.background = resources.getDrawable(R.drawable.rounded_rectangle_blue)
+        title.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+        subtitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorPrimary))
+    }
+
+    private fun setInactiveCurrencyStyles(layout: RelativeLayout, title: TextView, subtitle: TextView) {
+        layout.background = resources.getDrawable(R.drawable.rounded_rectangle)
+        title.setTextColor(ContextCompat.getColor(requireContext(), R.color.textSecondaryColor))
+        subtitle.setTextColor(ContextCompat.getColor(requireContext(), R.color.textSecondaryColor))
     }
 }

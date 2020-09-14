@@ -1,53 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:padding="20dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:padding="20dp">
 
     <ImageView
         android:id="@+id/transaction_item_icon"
         android:layout_width="44dp"
         android:layout_height="44dp"
-        android:padding="10dp"
         android:background="@drawable/rounded_stroke"
+        android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/transaction_item_title"
         style="@style/TextPrimary"
         android:paddingStart="@dimen/padding_text_transaction_item"
-        tools:text="Netflix"
         android:textSize="@dimen/text_size_normal_secondary"
+        app:layout_constraintStart_toEndOf="@id/transaction_item_icon"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/transaction_item_icon"/>
+        tools:text="Netflix" />
 
     <TextView
         android:id="@+id/transaction_item_date"
         style="@style/TextSecondary"
         android:paddingStart="@dimen/padding_text_transaction_item"
-        tools:text="15/12/2019"
         android:textSize="11sp"
+        app:layout_constraintStart_toEndOf="@id/transaction_item_icon"
         app:layout_constraintTop_toBottomOf="@id/transaction_item_title"
-        app:layout_constraintStart_toEndOf="@id/transaction_item_icon"/>
+        tools:text="15/12/2019" />
 
     <TextView
         android:id="@+id/transaction_item_current_sum"
         style="@style/TextPrimary"
-        tools:text="- £ 7.99"
-        android:textSize="@dimen/text_size_big"
         android:textColor="#030710"
+        android:textSize="@dimen/text_size_big"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        tools:text="- £ 7.99" />
 
     <TextView
         android:id="@+id/transaction_item_default_sum"
         style="@style/TextSecondary"
-        tools:text="$ 9.85"
         android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/transaction_item_current_sum"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        tools:text="$ 9.85" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

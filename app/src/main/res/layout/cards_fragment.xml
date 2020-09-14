@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/colorPrimary">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_cards_fragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Toolbar
@@ -23,14 +24,15 @@
                 android:id="@+id/back_button_cards_fragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/arrow_back"/>
+                android:padding="10dp"
+                android:src="@drawable/arrow_back" />
 
             <TextView
                 style="@style/TextPrimary"
                 android:layout_width="match_parent"
-                android:textSize="18sp"
+                android:gravity="center_horizontal"
                 android:text="@string/title_cards_fragment"
-                android:gravity="center_horizontal"/>
+                android:textSize="18sp" />
 
         </Toolbar>
 
@@ -41,10 +43,10 @@
         android:id="@+id/card_fragment_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:itemCount="3"
-        tools:listitem="@layout/cards_fragment_list_item"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbar_cards_fragment" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/appbar_cards_fragment"
+        tools:itemCount="3"
+        tools:listitem="@layout/cards_fragment_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,11 @@
-package com.example.bankclienttestapp
+package com.example.bankclienttestapp.ui.main.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bankclienttestapp.ui.main.Transaction
+import com.example.bankclienttestapp.R
+import com.example.bankclienttestapp.ui.main.viewholders.TransactionViewHolder
+import com.example.bankclienttestapp.ui.main.viewmodel.Transaction
 
 class TransactionAdapter(
     private val inflater: LayoutInflater,

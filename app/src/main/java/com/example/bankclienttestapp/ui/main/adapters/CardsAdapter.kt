@@ -1,9 +1,11 @@
-package com.example.bankclienttestapp
+package com.example.bankclienttestapp.ui.main.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bankclienttestapp.ui.main.viewholders.CardsViewHolder
+import com.example.bankclienttestapp.R
 import com.example.bankclienttestapp.model.User
 
 class CardsAdapter(

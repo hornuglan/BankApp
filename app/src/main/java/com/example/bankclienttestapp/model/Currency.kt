@@ -1,4 +1,4 @@
-package com.example.bankclienttestapp
+package com.example.bankclienttestapp.model
 
 enum class Currency {
     USD,

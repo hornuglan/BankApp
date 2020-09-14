@@ -1,8 +1,7 @@
-package com.example.bankclienttestapp
+package com.example.bankclienttestapp.model
 
 import android.os.Parcelable
 import android.util.Log
-import com.example.bankclienttestapp.model.Valute
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import com.github.kittinunf.result.Result
@@ -22,7 +21,7 @@ data class CurrencyResponse(
     val timestamp: String,
     @SerializedName("Valute")
     val valute: HashMap<String, Valute>
-): Parcelable
+) : Parcelable
 
 class CurrencyRepository {
     fun loadCurrencies(onSuccess: (CurrencyResponse) -> Unit, onFailure: (String) -> Unit) {
@@ -45,4 +44,4 @@ class CurrencyRepository {
                 }
             }
     }
- }
+}

@@ -20,4 +20,4 @@ data class Valute(
     val value: Double,
     @SerializedName("Previous")
     val previous: Double
-): Parcelable
+) : Parcelable

@@ -3,19 +3,13 @@ package com.example.bankclienttestapp
 import android.app.Application
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toolbar
-import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import com.example.bankclienttestapp.model.User
-import com.example.bankclienttestapp.model.UsersRepository
-import com.example.bankclienttestapp.ui.main.MainFragment
-import com.example.bankclienttestapp.ui.main.MainViewModel
-import com.example.bankclienttestapp.ui.main.MainViewModelFactory
-import com.google.android.material.appbar.MaterialToolbar
-import java.util.*
-import kotlin.collections.ArrayList
+import com.example.bankclienttestapp.model.CurrencyRepository
+import com.example.bankclienttestapp.model.UserRepository
+import com.example.bankclienttestapp.ui.main.viewmodel.MainViewModel
+import com.example.bankclienttestapp.ui.main.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +24,10 @@ class MainActivity : AppCompatActivity() {
 
         ViewModelProvider(
             this,
-            MainViewModelFactory(Application(), UsersRepository(), CurrencyRepository())
+            MainViewModelFactory(
+                Application(), UserRepository(),
+                CurrencyRepository()
+            )
         ).get(MainViewModel::class.java).preloadData()
     }
 }

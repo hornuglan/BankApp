@@ -1,14 +1,17 @@
 package com.example.bankclienttestapp.model
 
 import android.util.Log
-import com.example.bankclienttestapp.ResponseUser
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.Headers
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 
-class UsersRepository {
-    fun loadUserProfiles(onSuccess: (ResponseUser) -> Unit, onFailure: (String) -> Unit) {
+data class UserResponse(
+    val users: ArrayList<User>
+)
+
+class UserRepository {
+    fun loadUserProfiles(onSuccess: (UserResponse) -> Unit, onFailure: (String) -> Unit) {
         val url = "https://hr.peterpartner.net/test/android/v1/users.json"
 
         Fuel.get(url)
@@ -19,10 +22,9 @@ class UsersRepository {
                         val e = result.getException()
                         Log.d("Request Error", "${e.message}")
                         onFailure("${e.message}")
-
                     }
                     is Result.Success -> {
-                        val users = Gson().fromJson(result.get(), ResponseUser::class.java)
+                        val users = Gson().fromJson(result.get(), UserResponse::class.java)
                         onSuccess(users)
                     }
                 }

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.bankclienttestapp.ui.main.MainFragment"
+        android:name="com.example.bankclienttestapp.ui.main.fragments.MainFragment"
         android:label="main_fragment"
         tools:layout="@layout/main_fragment" >
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/cardsFragment"
-        android:name="com.example.bankclienttestapp.ui.main.CardsFragment"
+        android:name="com.example.bankclienttestapp.ui.main.fragments.CardsFragment"
         android:label="CardsFragment" >
         <action
             android:id="@+id/action_cardsFragment_to_mainFragment"

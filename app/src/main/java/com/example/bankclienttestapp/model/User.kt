@@ -1,17 +1,11 @@
 package com.example.bankclienttestapp.model
 
 import android.os.Parcelable
-import android.util.Log
-import com.example.bankclienttestapp.ResponseUser
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.core.Headers
-import com.github.kittinunf.result.Result
-import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class User (
+data class User(
     @SerializedName("card_number")
     val cardNumber: String,
     val type: String,

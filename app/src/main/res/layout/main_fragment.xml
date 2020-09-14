@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".ui.main.MainFragment">
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:paddingBottom="24dp"
+    tools:context=".ui.main.fragments.MainFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_main_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <Toolbar
@@ -24,9 +26,9 @@
             <TextView
                 style="@style/TextPrimary"
                 android:layout_width="match_parent"
-                android:textSize="18sp"
+                android:gravity="center_horizontal"
                 android:text="@string/title_main_fragment"
-                android:gravity="center_horizontal"/>
+                android:textSize="18sp" />
 
         </Toolbar>
 
@@ -34,25 +36,25 @@
 
     <include
         android:id="@+id/card_data"
+        layout="@layout/layout_card_data"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        layout="@layout/layout_card_data"
-        android:layout_marginTop="@dimen/margin_top_main_activity"
         android:layout_marginStart="@dimen/margin_start_main_activity"
+        android:layout_marginTop="@dimen/margin_top_main_activity"
         android:layout_marginEnd="@dimen/margin_end_main_activity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbar_main_fragment"/>
+        app:layout_constraintTop_toBottomOf="@id/appbar_main_fragment" />
 
     <TextView
         android:id="@+id/change_currency_title"
         style="@style/TextPrimary"
-        android:text="@string/main_fragment_change_currency_title"
-        android:textSize="20sp"
         android:paddingStart="@dimen/margin_start_main_activity"
         android:paddingTop="40dp"
+        android:text="@string/main_fragment_change_currency_title"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_data"/>
+        app:layout_constraintTop_toBottomOf="@id/card_data" />
 
     <include
         android:id="@+id/currencies"
@@ -65,18 +67,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/change_currency_title" />
+
     <include
         android:id="@+id/history"
         layout="@layout/layout_transactions_history_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:layout_marginStart="@dimen/margin_start_main_activity"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="@dimen/margin_end_main_activity"
         android:layout_marginBottom="@dimen/margin_bottom_main_activity"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/currencies"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/currencies" />
 
     <ProgressBar
         android:id="@+id/main_fragment_progressbar"

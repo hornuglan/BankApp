@@ -1,84 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:id="@+id/currency_gbp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/rounded_rectangle"
         android:paddingTop="@dimen/padding_currency_layout"
-        android:paddingBottom="@dimen/padding_currency_layout"
-        android:layout_toStartOf="@id/currency_eur"
-        android:background="@drawable/rounded_rectangle">
+        android:paddingBottom="@dimen/padding_currency_layout">
+
         <TextView
             android:id="@+id/currency_symbol_gbp"
             style="@style/TextSecondary"
-            android:text="@string/currency_icon_gbp"
-            android:textSize="30sp"
             android:paddingStart="@dimen/padding_currency_icon"
-            android:paddingEnd="@dimen/padding_currency_icon" />
+            android:paddingEnd="@dimen/padding_currency_icon"
+            android:text="@string/currency_icon_gbp"
+            android:textSize="30sp" />
+
         <TextView
             android:id="@+id/currency_name_gbp"
             style="@style/TextSecondary"
-            android:text="@string/currency_code_gbp"
-            android:textSize="@dimen/text_size_normal_secondary"
+            android:layout_below="@id/currency_symbol_gbp"
             android:paddingStart="@dimen/padding_currency_code"
             android:paddingEnd="@dimen/padding_currency_code"
-            android:layout_below="@id/currency_symbol_gbp"/>
+            android:text="@string/currency_code_gbp"
+            android:textSize="@dimen/text_size_normal_secondary" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/currency_eur"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/padding_currency_layout"
-        android:paddingBottom="@dimen/padding_currency_layout"
+        android:layout_centerInParent="true"
         android:layout_marginStart="@dimen/margin_currency_layout"
         android:layout_marginEnd="@dimen/margin_currency_layout"
         android:background="@drawable/rounded_rectangle"
-        android:layout_centerInParent="true">
+        android:paddingTop="@dimen/padding_currency_layout"
+        android:paddingBottom="@dimen/padding_currency_layout">
+
         <TextView
             android:id="@+id/currency_symbol_eur"
             style="@style/TextSecondary"
-            android:text="@string/currency_icon_eur"
-            android:textSize="30sp"
             android:paddingStart="@dimen/padding_currency_icon"
-            android:paddingEnd="@dimen/padding_currency_icon" />
+            android:paddingEnd="@dimen/padding_currency_icon"
+            android:text="@string/currency_icon_eur"
+            android:textSize="30sp" />
+
         <TextView
             android:id="@+id/currency_name_eur"
             style="@style/TextSecondary"
-            android:text="@string/currency_code_eur"
-            android:textSize="@dimen/text_size_normal_secondary"
+            android:layout_below="@id/currency_symbol_eur"
             android:paddingStart="@dimen/padding_currency_code"
             android:paddingEnd="@dimen/padding_currency_code"
-            android:layout_below="@id/currency_symbol_eur"/>
+            android:text="@string/currency_code_eur"
+            android:textSize="@dimen/text_size_normal_secondary" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/currency_rub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/rounded_rectangle"
         android:paddingTop="@dimen/padding_currency_layout"
-        android:paddingBottom="@dimen/padding_currency_layout"
-        android:layout_toEndOf="@id/currency_eur"
-        android:background="@drawable/rounded_rectangle">
+        android:paddingBottom="@dimen/padding_currency_layout">
+
         <TextView
             android:id="@+id/currency_symbol_rub"
             style="@style/TextSecondary"
-            android:text="@string/currency_icon_rub"
-            android:textSize="30sp"
             android:paddingStart="@dimen/padding_currency_icon"
-            android:paddingEnd="@dimen/padding_currency_icon" />
+            android:paddingEnd="@dimen/padding_currency_icon"
+            android:text="@string/currency_icon_rub"
+            android:textSize="30sp" />
+
         <TextView
             android:id="@+id/currency_name_rub"
             style="@style/TextSecondary"
-            android:text="@string/currency_code_rub"
-            android:textSize="@dimen/text_size_normal_secondary"
+            android:layout_below="@id/currency_symbol_rub"
             android:paddingStart="@dimen/padding_currency_code"
             android:paddingEnd="@dimen/padding_currency_code"
-            android:layout_below="@id/currency_symbol_rub"/>
+            android:text="@string/currency_code_rub"
+            android:textSize="@dimen/text_size_normal_secondary" />
     </RelativeLayout>
 
 </RelativeLayout>

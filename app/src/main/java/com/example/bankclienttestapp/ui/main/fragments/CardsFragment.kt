@@ -1,4 +1,4 @@
-package com.example.bankclienttestapp.ui.main
+package com.example.bankclienttestapp.ui.main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bankclienttestapp.CardsAdapter
+import com.example.bankclienttestapp.ui.main.adapters.CardsAdapter
 import com.example.bankclienttestapp.MainActivity
 import com.example.bankclienttestapp.R
 import com.example.bankclienttestapp.model.User
+import com.example.bankclienttestapp.ui.main.viewmodel.MainViewModel
 
 class CardsFragment : Fragment() {
     private lateinit var adapter: CardsAdapter
@@ -42,7 +43,12 @@ class CardsFragment : Fragment() {
             (activity as MainActivity).navController.navigate(R.id.action_cardsFragment_to_mainFragment)
         }
 
-        adapter = CardsAdapter(LayoutInflater.from(activity), arrayListOf(), callback, viewModel::isSelectedCard)
+        adapter = CardsAdapter(
+            LayoutInflater.from(activity),
+            arrayListOf(),
+            callback,
+            viewModel::isSelectedCard
+        )
 
         return root
     }
@@ -52,11 +58,6 @@ class CardsFragment : Fragment() {
         backButton.setOnClickListener {
             (activity as MainActivity).navController.navigate(R.id.action_cardsFragment_to_mainFragment)
         }
-
-        // 1. click on recycler
-        // get item ID
-        // viewModel.setCurrentProfileTo(ie 1)
-        // viewModel.userProfiles
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -84,6 +85,6 @@ class CardsFragment : Fragment() {
     }
 
     interface IsCardSelectedListener {
-        fun isSelectedCard(user: User) : Boolean
+        fun isSelectedCard(user: User): Boolean
     }
 }
